@@ -5,6 +5,7 @@ import UserCard from './components/UserCard';
 function App() {
   const [name, setName] = useState('');
   const [age,setAge] = useState<number|''>('');
+  const [submitted, setSubmitted] = useState(false);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -12,13 +13,20 @@ function App() {
 
   const handleAgeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // נוודא שהערך הוא מספר, או מחרוזת ריקה
     setAge(value === '' ? '' : parseInt(value));
+  };
+
+  const handleSubmit = () => {
+    if (name !== '' && age !== '') {
+      setSubmitted(true);
+    } else {
+      alert('Please fill in all fields');
+    }
   };
 
   return (
     <div className="App">
-      {(name === '' || age === '') && (
+      {!submitted && (
       <div className="input data" style={{ marginBottom: '20px' }}>
         <input
           type="text"
@@ -34,9 +42,10 @@ function App() {
           onChange={handleAgeChange}
           style={{ padding: '8px', borderRadius: '8px', border: '1px solid #ccc' }}
         />
+        <button onClick={handleSubmit}>send</button>
       </div>
       )}
-      {name && age !== '' && (
+      {submitted && (
         <UserCard name={name} age={Number(age)} />
       )}
     </div>
