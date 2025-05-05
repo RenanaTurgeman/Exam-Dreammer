@@ -27,20 +27,19 @@ function App() {
   return (
     <div className="App">
       {!submitted && (
-      <div className="input data" style={{ marginBottom: '20px' }}>
+      <div className="input-data">
         <input
           type="text"
           placeholder="Enter your name"
           value={name}
           onChange={handleNameChange}
-          style={{ marginRight: '10px', padding: '8px', borderRadius: '8px', border: '1px solid #ccc' }}
         />
         <input
           type="number"
+          min={0}
           placeholder="Enter your age"
           value={age}
           onChange={handleAgeChange}
-          style={{ padding: '8px', borderRadius: '8px', border: '1px solid #ccc' }}
         />
         <button onClick={handleSubmit}>send</button>
       </div>
